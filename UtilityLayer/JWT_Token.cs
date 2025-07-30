@@ -24,7 +24,7 @@ namespace UtilityLayer
                 new Claim("FirstName",$"{user.FirstName}"),
                 new Claim("LastName",$"{user.LastName}"),
                // new Claim("Address",$"{user.Address}"),
-               // new Claim("Mobile",$"{user.Mobile}"),
+                new Claim("UserId",$"{user.UserId}"),
                 new Claim("CreatedAt",$"{user.CreatedDate}"),
                 new Claim("Role",$"{user.RoleId}"),
                 new Claim("Username",$"{user.Email}")
@@ -33,7 +33,7 @@ namespace UtilityLayer
             var tokenDescripter = new SecurityTokenDescriptor
             {
                 Subject = identity,
-                Expires = DateTime.Now.AddSeconds(15),
+                Expires = DateTime.UtcNow.AddMinutes(60),
                 SigningCredentials = credentials
 
             };

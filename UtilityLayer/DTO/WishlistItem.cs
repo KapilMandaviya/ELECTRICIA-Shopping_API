@@ -6,22 +6,19 @@ namespace UtilityLayer.DTO
 
     public partial class WishlistItem_DTO
     {
-        public int WishlistItemId { get; set; }
-
-        public int? WishlistId { get; set; }
-
         public int? ProductId { get; set; }
 
-        public DateTime? CreatedDate { get; set; }
+        public string? productName { get; set; }
 
-        public string? CreatedByUserId { get; set; }
+        public string? imageUrl { get; set; }
 
-        public DateTime? UpdatedDate { get; set; }
 
-        public DateTime? DeletedDate { get; set; }
+        public int? quantity { get; set; }
 
-        public bool? IsDelete { get; set; }
+        public double? price { get; set; }
 
-        public string? ModifyAction { get; set; }
+        public double? totalPrice { get; set; }
+
+
     }
 }

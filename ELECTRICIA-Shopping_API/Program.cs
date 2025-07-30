@@ -44,6 +44,8 @@ builder.Services.AddScoped<IAuthenticRepo, AuthenticRepo>(); // Example reposito
 builder.Services.AddScoped<IAboutUsDetail,AboutUsRepo>(); // Example repository
 builder.Services.AddScoped<IBlogServices,BlogServices>(); // Example repository
 builder.Services.AddScoped<ICategoryDetailService,CategoryDetailService>(); // Example repository
+builder.Services.AddScoped<IProductServiceDetails,ProductServiceDetails>(); // Example repository
+builder.Services.AddScoped<ICartWishList,CartWishListService>(); // Example repository
 
 
 builder.Services.AddControllers();
@@ -53,14 +55,14 @@ builder.Services.AddSwaggerGen();
 //builder.Services.AddSession();
 
 var app = builder.Build();
-
-
-
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction()) // TEMP
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseCors("EmployeeOrigins");

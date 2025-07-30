@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataAccessLayer.DTO;
 using DataAccessLayer.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +16,6 @@ public partial class ELECTRICIADBContext : DbContext
     {
     }
 
-    //public virtual DbSet<BlogDetailDTO> BlogDetailDTO { get; set; }
     public virtual DbSet<AboutDetail> AboutDetails { get; set; }
 
     public virtual DbSet<AccessoriesMaster> AccessoriesMasters { get; set; }
@@ -27,8 +25,6 @@ public partial class ELECTRICIADBContext : DbContext
     public virtual DbSet<BlogDescription> BlogDescriptions { get; set; }
 
     public virtual DbSet<Cart> Carts { get; set; }
-
-    public virtual DbSet<CartItem> CartItems { get; set; }
 
     public virtual DbSet<CategoriesMaster> CategoriesMasters { get; set; }
 
@@ -86,13 +82,11 @@ public partial class ELECTRICIADBContext : DbContext
 
     public virtual DbSet<UserMaster> UserMasters { get; set; }
 
-    public virtual DbSet<WishlistItem> WishlistItems { get; set; }
-
     public virtual DbSet<WishlistsMaster> WishlistsMasters { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-VT26F9U\\SQLEXPRESS;Database=ELECTRICIA-Shopping;Trusted_Connection=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=sql.bsite.net\\MSSQL2016;Database=kapilmandaviya1_ELECTRICIAShopping;User Id=kapilmandaviya1_ELECTRICIAShopping;Password=kapil@192151;Encrypt=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -260,38 +254,22 @@ public partial class ELECTRICIADBContext : DbContext
             entity.Property(e => e.DeletedDate)
                 .HasColumnType("datetime")
                 .HasColumnName("Deleted_Date");
-            entity.Property(e => e.ModifyAction)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("Modify_Action");
-            entity.Property(e => e.UpdatedDate)
-                .HasColumnType("datetime")
-                .HasColumnName("Updated_Date");
-            entity.Property(e => e.UserId).HasColumnName("User_ID");
-        });
-
-        modelBuilder.Entity<CartItem>(entity =>
-        {
-            entity.Property(e => e.CartItemId).HasColumnName("CartItemID");
-            entity.Property(e => e.CartId).HasColumnName("CartID");
-            entity.Property(e => e.CreatedByUserId)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("CreatedBy_UserId");
-            entity.Property(e => e.CreatedDate)
-                .HasColumnType("datetime")
-                .HasColumnName("Created_Date");
-            entity.Property(e => e.DeletedDate)
-                .HasColumnType("datetime")
-                .HasColumnName("Deleted_Date");
+            entity.Property(e => e.ImageUrl)
+                .HasMaxLength(150)
+                .IsUnicode(false);
             entity.Property(e => e.ModifyAction)
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("Modify_Action");
             entity.Property(e => e.ProductId).HasColumnName("Product_ID");
+            entity.Property(e => e.ProductName)
+                .HasMaxLength(150)
+                .IsUnicode(false)
+                .HasColumnName("Product_Name");
             entity.Property(e => e.UpdatedDate)
                 .HasColumnType("datetime")
                 .HasColumnName("Updated_Date");
+            entity.Property(e => e.UserId).HasColumnName("User_ID");
         });
 
         modelBuilder.Entity<CategoriesMaster>(entity =>
@@ -802,9 +780,6 @@ public partial class ELECTRICIADBContext : DbContext
 
             entity.ToTable("ProductsMaster");
 
-            entity.Property(e => e.CategoryId)
-                .HasMaxLength(150)
-                .IsUnicode(false);
             entity.Property(e => e.CreatedByUserId)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -820,10 +795,7 @@ public partial class ELECTRICIADBContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("Modify_Action");
             entity.Property(e => e.PBasePrice).HasColumnName("P_BasePrice");
-            entity.Property(e => e.PDescription)
-                .HasMaxLength(10)
-                .IsFixedLength()
-                .HasColumnName("P_Description");
+            entity.Property(e => e.PDescription).HasColumnName("P_Description");
             entity.Property(e => e.PName)
                 .HasMaxLength(250)
                 .IsUnicode(false)
@@ -1193,30 +1165,6 @@ public partial class ELECTRICIADBContext : DbContext
                 .HasColumnName("Updated_Date");
         });
 
-        modelBuilder.Entity<WishlistItem>(entity =>
-        {
-            entity.Property(e => e.WishlistItemId).HasColumnName("WishlistItemID");
-            entity.Property(e => e.CreatedByUserId)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("CreatedBy_UserId");
-            entity.Property(e => e.CreatedDate)
-                .HasColumnType("datetime")
-                .HasColumnName("Created_Date");
-            entity.Property(e => e.DeletedDate)
-                .HasColumnType("datetime")
-                .HasColumnName("Deleted_Date");
-            entity.Property(e => e.ModifyAction)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("Modify_Action");
-            entity.Property(e => e.ProductId).HasColumnName("ProductID");
-            entity.Property(e => e.UpdatedDate)
-                .HasColumnType("datetime")
-                .HasColumnName("Updated_Date");
-            entity.Property(e => e.WishlistId).HasColumnName("WishlistID");
-        });
-
         modelBuilder.Entity<WishlistsMaster>(entity =>
         {
             entity.HasKey(e => e.WishlistId);
@@ -1234,10 +1182,18 @@ public partial class ELECTRICIADBContext : DbContext
             entity.Property(e => e.DeletedDate)
                 .HasColumnType("datetime")
                 .HasColumnName("Deleted_Date");
+            entity.Property(e => e.ImageUrl)
+                .HasMaxLength(150)
+                .IsUnicode(false);
             entity.Property(e => e.ModifyAction)
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("Modify_Action");
+            entity.Property(e => e.ProductId).HasColumnName("Product_ID");
+            entity.Property(e => e.ProductName)
+                .HasMaxLength(150)
+                .IsUnicode(false)
+                .HasColumnName("Product_Name");
             entity.Property(e => e.UpdatedDate)
                 .HasColumnType("datetime")
                 .HasColumnName("Updated_Date");
@@ -1245,11 +1201,7 @@ public partial class ELECTRICIADBContext : DbContext
         });
 
         OnModelCreatingPartial(modelBuilder);
-
-
-        modelBuilder.Entity<BlogDetailDTO>()
-            .HasNoKey()
-            .ToView(null); // No table mapping, just for queries
     }
+
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

@@ -52,8 +52,9 @@ namespace RepositoryLayer.Repo
                     response.LoginStatus = "InvalidUsername";
                     return response;
                 }
-                
-                
+                var decode = (DataEncryption.DecodeFrom64(userdetail.Password));
+
+
                 if (!(DataEncryption.DecodeFrom64(userdetail.Password) == user.Password))
                 {
                     response.Token = "";

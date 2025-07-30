@@ -10,6 +10,7 @@ namespace DataAccessLayer.Models
     {
         //public string? CategoriesJson { get; set; }
 
+        
         public string? category { get; set; }
 
         public string? subcategories { get; set; }

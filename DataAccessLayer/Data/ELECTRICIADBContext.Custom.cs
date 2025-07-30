@@ -14,11 +14,13 @@ namespace DataAccessLayer.Data
     {
         public virtual DbSet<BlogDetailDTO> BlogDetailDTO { get; set; }
         public virtual DbSet<SPCategoryList> SPCategoryList { get; set; }
+        public virtual DbSet<SPProdcutCategoryList> SPProdcutCategoryList { get; set; }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<BlogDetailDTO>().HasNoKey().ToView(null); // No table mapping, just for queries
             modelBuilder.Entity<SPCategoryList>().HasNoKey().ToView(null); // No table mapping, just for queries
+            modelBuilder.Entity<SPProdcutCategoryList>().HasNoKey().ToView(null); // No table mapping, just for queries
         }
     }
 }

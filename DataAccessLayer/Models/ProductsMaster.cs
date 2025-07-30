@@ -11,7 +11,7 @@ public partial class ProductsMaster
 
     public string? PSku { get; set; }
 
-    public string? CategoryId { get; set; }
+    public int? CategoryId { get; set; }
 
     public double? PBasePrice { get; set; }
 

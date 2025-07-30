@@ -17,8 +17,7 @@ namespace ELECTRICIA_Shopping_API.Controllers
              this.aboutUsDetail = aboutUs;
             this.blogServices = blog;
         }
-
-        [Authorize]
+ 
         [Route("AboutUsDetail")]
         [HttpGet]
         public async Task<IActionResult> AboutUs() {
@@ -26,7 +25,7 @@ namespace ELECTRICIA_Shopping_API.Controllers
             var aboutUs = await aboutUsDetail.AboutUsDetail();
             return Ok(aboutUs);
         }
-        [Authorize]
+        
         [Route("ContactDetail")]
         [HttpGet]
         public async Task<IActionResult> contactUsDetail()
@@ -36,7 +35,7 @@ namespace ELECTRICIA_Shopping_API.Controllers
             return Ok(contactUsDetail);
         }
 
-        [Authorize]
+        
         [Route("FAQDtails")]
         [HttpGet]
         public async Task<IActionResult> FAQDtails()

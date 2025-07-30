@@ -1,25 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace UtilityLayer.DTO
 {
-
-    public partial class Cart_DTO
+    public partial class Cart_dto
     {
-        public int CartId { get; set; }
-
         public int? UserId { get; set; }
 
-        public DateTime? CreatedDate { get; set; }
+        [JsonPropertyName("cartItems")]
+        public List<CartItem_DTO> CartItem { get; set; } = new();
 
-        public string? CreatedByUserId { get; set; }
+        [JsonPropertyName("wishlistItems")]
+        public List<WishlistItem_DTO> Wishlistitem { get; set; } = new();
 
-        public DateTime? UpdatedDate { get; set; }
+    }
 
-        public DateTime? DeletedDate { get; set; }
+    public partial class cart_WishlistRemoveDto
+    {
+        public int? UserId { get; set; }
 
-        public bool? IsDelete { get; set; }
+        [JsonPropertyName("Cart_ProductId")]
+        public int? Cart_ProductId { get; set; }
 
-        public string? ModifyAction { get; set; }
+        [JsonPropertyName("wishlist_ProductId")]
+        public int? wishlist_ProductId { get; set; }
+
+
     }
 }

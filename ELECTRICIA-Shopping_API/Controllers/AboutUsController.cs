@@ -9,7 +9,7 @@ namespace ELECTRICIA_Shopping_API.Controllers
     [ApiController]
     public class AboutUsController : ControllerBase
     {
-        readonly IAboutUsDetail aboutUsDetail;
+        readonly IAboutUsDetail aboutUsDetail ;
         readonly IBlogServices blogServices;
 
         public AboutUsController(IAboutUsDetail aboutUs,IBlogServices blog)
